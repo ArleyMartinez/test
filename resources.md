@@ -10,7 +10,7 @@ _Made by_ [@David Adarme](https://www.github.com/davidadarme)
 
 ---
 # Contenido 
-_Da click en los siguientes enlaces para redigirir al contenido que deseas_
+_Da click en los siguientes enlaces para redirigir al contenido que deseas_
 1. [Libros PDF](#libros-pdf)
 2. [Ejercicios](#ejercicios)
     - [Python](#ejercicios-python)
