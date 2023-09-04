@@ -33,7 +33,7 @@ CREATE TABLE tab_consultas
 (
     id_consulta INTEGER NOT NULL,
     tipo_consu  VARCHAR NOT NULL,
-    PRIMARY KEY(id_consulta),
+    PRIMARY KEY(id_consulta)
 );
 
 
@@ -41,6 +41,7 @@ CREATE TABLE tab_aprendiz
 (
     id_aprendiz INTEGER NOT NULL,
     id_asesor   INTEGER NOT NULL,
+    id_consulta INTEGER NOT NULL,
     nombre      VARCHAR NOT NULL,
     telefono	VARCHAR	NOT NULL,
     correo		VARCHAR	NOT NULL,
@@ -56,13 +57,14 @@ CREATE TABLE tab_docente
     id_docente  INTEGER NOT NULL,
     id_aprendiz INTEGER NOT NULL,
     nit_empre	VARCHAR	NOT NULL,
+    id_consulta INTEGER NOT NULL,
     nombre      VARCHAR NOT NULL,
     telefono	VARCHAR	NOT NULL,
     correo		VARCHAR	NOT NULL,
     PRIMARY KEY(id_docente),
     FOREIGN KEY (nit_empre) REFERENCES tab_emprendimiento,
     FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz,
-     FOREIGN KEY (id_consulta) REFERENCES tab_consultas
+    FOREIGN KEY (id_consulta) REFERENCES tab_consultas
 );
 
 
