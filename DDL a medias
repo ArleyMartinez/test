@@ -1,1 +1,113 @@
+DROP TABLE IF EXISTS tab_emprendimiento;
+DROP TABLE IF EXISTS tab_asesor;
+DROP TABLE IF EXISTS tab_aprendiz;
+DROP TABLE IF EXISTS tab_docente;
+DROP TABLE IF EXISTS tab_informes;
+DROP TABLE IF EXISTS tab_avance;
+DROP TABLE IF EXISTS tab_consultas;
+DROP TABLE IF EXISTS tab_proyectos;
+DROP TABLE IF EXISTS tab_preinscritos;
 
+
+CREATE TABLE tab_emprendimiento
+(
+    nit_empre	INTEGER	NOT NULL,
+    direccion	VARCHAR	NOT NULL,
+    telefono	INTEGER	NOT NULL,
+    correo		VARCHAR	NOT NULL,
+    PRIMARY KEY(nit_empre)
+);
+
+
+CREATE TABLE tab_asesor
+(
+    id_asesor   INTEGER NOT NULL,
+    nombre      VARCHAR NOT NULL,
+    telefono	VARCHAR	NOT NULL,
+    correo		VARCHAR	NOT NULL,
+    PRIMARY KEY(id_asesor)
+);
+
+
+CREATE TABLE tab_aprendiz
+(
+    id_aprendiz INTEGER NOT NULL,
+    id_asesor   INTEGER NOT NULL,
+    nombre      VARCHAR NOT NULL,
+    telefono	VARCHAR	NOT NULL,
+    correo		VARCHAR	NOT NULL,
+    ficha       VARCHAR NOT NULL,
+    PRIMARY KEY(id_aprendiz),
+    FOREIGN KEY (id_asesor) REFERENCES tab_asesor
+);
+
+
+CREATE TABLE tab_docente
+(
+    id_docente  INTEGER NOT NULL,
+    id_aprendiz INTEGER NOT NULL,
+    nit_empre	VARCHAR	NOT NULL,
+    nombre      VARCHAR NOT NULL,
+    telefono	VARCHAR	NOT NULL,
+    correo		VARCHAR	NOT NULL,
+    PRIMARY KEY(id_docente),
+    FOREIGN KEY (nit_empre) REFERENCES tab_emprendimiento,
+    FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz
+);
+
+
+CREATE TABLE tab_informes
+(
+    num_informe CHAR NOT NULL,
+    id_docente  INTEGER NOT NULL,
+    tipo_info   VARCHAR NOT NULL,
+    PRIMARY KEY(num_informe),
+    FOREIGN KEY (id_docente) REFERENCES tab_docente
+);
+
+
+CREATE TABLE tab_avance
+(
+    num_avance CHAR NOT NULL,
+    id_aprendiz INTEGER NOT NULL,
+    fecha      TIME NOT NULL,
+    PRIMARY KEY(num_avance),
+    FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz
+);
+
+
+CREATE TABLE tab_consultas
+(
+    id_consulta INTEGER NOT NULL,
+    id_aprendiz INTEGER NOT NULL,
+    id_docente  INTEGER NOT NULL,
+    tipo_consu  VARCHAR NOT NULL,
+    PRIMARY KEY(id_consulta),
+    FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz,
+    FOREIGN KEY (id_docente) REFERENCES tab_docente
+);
+
+
+CREATE TABLE tab_proyectos
+(
+    id_proyecto INTEGER NOT NULL,
+    nit_empre   VARCHAR NOT NULL,
+    id_aprendiz INTEGER NOT NULL,
+    tipo_proyec VARCHAR NOT NULL,
+    estado      BOOLEAN NOT NULL,
+    PRIMARY KEY(id_proyecto),
+    FOREIGN KEY (nit_empre) REFERENCES tab_emprendimiento,
+    FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz
+);
+
+
+CREATE TABLE tab_preinscritos
+(
+    num_preins  CHAR NOT NULL,
+    nit_empre   VARCHAR NOT NULL,
+    nombre      VARCHAR NOT NULL,
+    correo      VARCHAR NOT NULL,
+    telefono    VARCGAR NOT NULL,
+    PRIMARY KEY(num_preins),
+    FOREIGN KEY (nit_empre) REFERENCES tab_emprendimiento
+);
