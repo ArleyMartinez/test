@@ -29,6 +29,14 @@ CREATE TABLE tab_asesor
 );
 
 
+CREATE TABLE tab_consultas
+(
+    id_consulta INTEGER NOT NULL,
+    tipo_consu  VARCHAR NOT NULL,
+    PRIMARY KEY(id_consulta),
+);
+
+
 CREATE TABLE tab_aprendiz
 (
     id_aprendiz INTEGER NOT NULL,
@@ -38,7 +46,8 @@ CREATE TABLE tab_aprendiz
     correo		VARCHAR	NOT NULL,
     ficha       VARCHAR NOT NULL,
     PRIMARY KEY(id_aprendiz),
-    FOREIGN KEY (id_asesor) REFERENCES tab_asesor
+    FOREIGN KEY (id_asesor) REFERENCES tab_asesor,
+    FOREIGN KEY (id_consulta) REFERENCES tab_consultas
 );
 
 
@@ -52,7 +61,8 @@ CREATE TABLE tab_docente
     correo		VARCHAR	NOT NULL,
     PRIMARY KEY(id_docente),
     FOREIGN KEY (nit_empre) REFERENCES tab_emprendimiento,
-    FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz
+    FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz,
+     FOREIGN KEY (id_consulta) REFERENCES tab_consultas
 );
 
 
@@ -73,18 +83,6 @@ CREATE TABLE tab_avance
     fecha      TIME NOT NULL,
     PRIMARY KEY(num_avance),
     FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz
-);
-
-
-CREATE TABLE tab_consultas
-(
-    id_consulta INTEGER NOT NULL,
-    id_aprendiz INTEGER NOT NULL,
-    id_docente  INTEGER NOT NULL,
-    tipo_consu  VARCHAR NOT NULL,
-    PRIMARY KEY(id_consulta),
-    FOREIGN KEY (id_aprendiz) REFERENCES tab_aprendiz,
-    FOREIGN KEY (id_docente) REFERENCES tab_docente
 );
 
 
